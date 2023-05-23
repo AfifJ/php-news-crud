@@ -1,18 +1,16 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "pwd_news");
-if (!$conn)
-  die("Fail to open ");
 
+include "inc/head.php";
 session_start();
+
+$page = "";
+$response = "";
 if (isset($_SESSION['username'])) {
   echo "Sudah login dengan username " . $_SESSION['username'];
   echo "<br>";
   echo "<a href=\"index.php\">home</a>";
   die;
 }
-$page = "";
-$response = "";
-
 if (isset($_POST['submit'])) {
   if (empty($_POST['username']) || empty($_POST['password'])) {
     $location = $_SERVER['PHP_SELF'];
@@ -45,14 +43,12 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-include "inc/head.php";
 ?>
 
 
 <body>
   <div style="margin-top:100px;">
-    <div
-      class=" mx-auto max-w-lg h-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+    <div class=" mx-auto max-w-lg h-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
       <form class="grid place-items-center pt-10" method="post">
         <h3 class="mb-4 text-2xl font-bold leading-none tracking-tight text-gray-900 ">
           Login to Your Account</h3>

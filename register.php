@@ -1,7 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "pwd_news");
-if (!$conn)
-  die("Fail to open ");
+include "inc/head.php";
 session_start();
 
 if (isset($_SESSION['username'])) {
@@ -36,13 +34,13 @@ if (isset($_POST['submit'])) {
       $q = "insert into user (username, password, role) values ('$username','$password','user')";
       $_SESSION['username'] = $username;
       if ($conn->query($q))
-        header("location:homepage.php");
+        header("location:index.php");
       else
         $response = "Terjadi kesalahan";
     }
   }
 }
-include "inc/head.php"
+
   ?>
 
 <body>
@@ -59,13 +57,13 @@ include "inc/head.php"
       <div class="mb-6">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Make a
           password</label>
-        <input type="text" id="password" name="password"
+        <input type="password" id="password" name="password"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
       <div class="mb-6">
         <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900">Repeat
           password</label>
-        <input type="text" id="repeat-password" name="repeatPassword"
+        <input type="password" id="repeat-password" name="repeatPassword"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
       </div>
       <div class="flex items-start mb-6">

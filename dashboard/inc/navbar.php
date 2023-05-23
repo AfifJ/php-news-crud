@@ -1,3 +1,7 @@
+<?php
+$basename = basename($_SERVER['PHP_SELF']);
+?>
+
 <body>
 
   <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
@@ -16,56 +20,32 @@
             </svg>
           </button>
           <a href="index.php" class="flex ml-2 md:mr-24">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-            <span
-              class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Flowbite</span>
+            <img src="../img/logo.png" class="h-8 mr-3" alt="FlowBite Logo" />
           </a>
         </div>
         <div class="flex items-center">
           <div class="flex items-center ml-3">
-            <div>
-              <button type="button"
-                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  alt="user photo">
-              </button>
-            </div>
-            <div
-              class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
-              id="dropdown-user">
-              <div class="px-4 py-3" role="none">
-                <p class="text-sm text-gray-900" role="none">
-                  Neil Sims
-                </p>
-                <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                  neil.sims@flowbite.com
-                </p>
-              </div>
-              <ul class="py-1" role="none">
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem">Dashboard</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem">Settings</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem">Earnings</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem">Sign out</a>
-                </li>
-              </ul>
-            </div>
+          <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+            class="inline-flex items-center justify-center w-full px-8 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+            <svg aria-hidden="true" class="w-5 h-5 mr-3 my-auto fill-current" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="capitalize">
+              <?= $_SESSION['username'] ?>
+            </span>
+
+          </button>
+
+          <!-- Dropdown menu -->
+          <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                <form method="post">
+                  <button class="block px-4 py-2 w-full hover:bg-gray-100" type="submit" name="signout"> Sign out
+                  </button>
+                </form>
+          </div>
           </div>
         </div>
       </div>
@@ -79,10 +59,8 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
       <ul class="space-y-2 font-medium">
         <li>
-          <a href="index.php"
-            class="flex items-center p-2 text-gray-900 font-bold rounded-lg hover:bg-gray-100">
-            <svg aria-hidden="true"
-              class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
+          <a href="index.php" class="flex items-center p-2 text-gray-900 <?php if ($basename == "index.php") echo "font-bold" ?> rounded-lg hover:bg-gray-100">
+            <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
               <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -91,8 +69,7 @@
           </a>
         </li>
         <li>
-          <a href="input.php"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="input.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 <?php if ($basename == "input.php") echo "font-bold" ?>">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -107,8 +84,7 @@
           </a>
         </li>
         <li>
-          <a href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -122,8 +98,7 @@
           </a>
         </li>
         <li>
-          <a href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -134,8 +109,7 @@
           </a>
         </li>
         <li>
-          <a href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -147,8 +121,7 @@
           </a>
         </li>
         <li>
-          <a href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -160,8 +133,7 @@
           </a>
         </li>
         <li>
-          <a href="../index.php"
-            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+          <a href="../index.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
               fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
