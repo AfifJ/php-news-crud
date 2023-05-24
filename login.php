@@ -1,8 +1,10 @@
 <?php
 
-include "inc/head.php";
 session_start();
+include "inc/conn.php";
 
+
+include "inc/head.php";
 $page = "";
 $response = "";
 if (isset($_SESSION['username'])) {
@@ -30,6 +32,7 @@ if (isset($_POST['submit'])) {
         if ($password == $result->password) {
           $response = "Akan diarahkan ke halaman login";
           $_SESSION['username'] = $username;
+          $_SESSION['userid'] = $result->id;
           header("location:index.php");
         } else
           $response = "<div class=\"p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50\" role=\"alert\">
@@ -47,18 +50,18 @@ if (isset($_POST['submit'])) {
 
 
 <body>
-  <div style="margin-top:100px;">
-    <div class=" mx-auto max-w-lg h-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+  <div class="h-screen w-screen flex items-center justify-center">
+    <div class="m-4 w-96 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
       <form class="grid place-items-center pt-10" method="post">
         <h3 class="mb-4 text-2xl font-bold leading-none tracking-tight text-gray-900 ">
           Login to Your Account</h3>
-        <div class="mb-6">
+        <div class="mb-6 w-2/3">
           <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
           <input type="text" name="username" id="username"
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="">
         </div>
-        <div class="mb-6">
+        <div class="mb-6 w-2/3">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your
             password</label>
           <input type="password" id="password" name="password"

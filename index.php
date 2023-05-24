@@ -1,15 +1,45 @@
 <?php
 session_start();
+include "inc/conn.php";
 include "inc/head.php";
 
 $response = "";
-$file = json_decode(file_get_contents("today.json"))->today->articles;
+$file = $conn->query("select * from news inner join publish where news.id = publish.news_id order by publish.date desc");
+// $file = json_decode(file_get_contents("today.json"))->today->articles;
 if (isset($_POST['signoutsure'])) {
   session_destroy();
   header("location:index.php");
 }
 
+
+if (!isset($_SESSION['username'])) {
+  ?>
+  <!-- Main modal -->
+  <div class="w-screen h-screen bg-gray-900 bg-opacity-80 fixed inset-0 z-40 grid place-items-center backdrop-blur-md">
+
+    <!-- Modal content -->
+    <div class="bg-white rounded-lg shadow w-1/2">
+
+      <!-- Modal header -->
+      <div class="px-6 py-4 border-b rounded-t">
+        <h3 class="text-base font-semibold text-gray-900 text-xl lg:text-3xl">
+          Login First
+        </h3>
+      </div>
+      <!-- Modal body -->
+      <div class="p-6">
+        <p class="text-sm font-normal text-gray-500">You have to log in to access this website</p>
+        <a href="login.php"
+          class="mt-6 flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-blue-50 hover:bg-blue-100 group hover:shadow">
+          <span class="flex-1 whitespace-nowrap text-center">Login</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <?php
+}
 ?>
+
 
 <body class="bg-white h-screen relative">
 
@@ -84,15 +114,17 @@ if (isset($_POST['signoutsure'])) {
   <div class="grid place-items-center mr-6 ml-6">
     <div class="mx-auto  my-10 grid gap-4 lg:grid-cols-2 max-w-6xl place-items-center">
       <?php
-      foreach ($file as $article) {
+      while ($article = $file->fetch_object()) {
         $title = $article->title;
         $image = $article->image;
-        $desc = $article->description;
+        $desc = $article->content;
         ?>
         <a href=""
           class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
-          <img class="md:w-48 h-full md:aspect-square object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
-            src="<?= $image ?>" alt="">
+          <?php if (!empty($image)) { ?>
+            <img class="md:w-48 h-full md:aspect-square object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
+              src="<?= $image ?>" alt="">
+          <?php } ?>
           <div class="flex flex-col justify-between p-4 leading-normal overflow-hidden">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 line-clamp-2">
               <?= $title ?>
@@ -111,33 +143,7 @@ if (isset($_POST['signoutsure'])) {
 
 
   <?php
-  if (!isset($_SESSION['username'])) {
-    ?>
 
-    <!-- Main modal -->
-    <div class="w-screen h-screen bg-gray-900 bg-opacity-80 fixed inset-0 z-40 grid place-items-center backdrop-blur-md">
-
-      <!-- Modal content -->
-      <div class="bg-white rounded-lg shadow w-1/2">
-
-        <!-- Modal header -->
-        <div class="px-6 py-4 border-b rounded-t">
-          <h3 class="text-base font-semibold text-gray-900 text-xl lg:text-3xl">
-            Login First
-          </h3>
-        </div>
-        <!-- Modal body -->
-        <div class="p-6">
-          <p class="text-sm font-normal text-gray-500">You have to log in to access this website</p>
-          <a href="login.php"
-            class="mt-6 flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-blue-50 hover:bg-blue-100 group hover:shadow">
-            <span class="flex-1 whitespace-nowrap text-center">Login</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <?php
-  }
   if (isset($_POST['signout'])) {
     ?>
     <div class="w-screen h-screen bg-gray-900 bg-opacity-80 fixed inset-0 z-40 grid place-items-center backdrop-blur-md">

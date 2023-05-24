@@ -1,6 +1,7 @@
 <?php
-include "inc/head.php";
 session_start();
+
+include "inc/conn.php";
 
 if (isset($_SESSION['username'])) {
   echo "Sudah login dengan username " . $_SESSION['username'];
@@ -40,8 +41,8 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-
-  ?>
+include "inc/head.php";
+?>
 
 <body>
   <div class="container mx-auto max-w-lg h-full">
