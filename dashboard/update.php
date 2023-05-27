@@ -2,7 +2,7 @@
 include "../inc/conn.php";
 session_start();
 if (!isset($_SESSION['username']))
-header("location:../index.php");
+  header("location:../index.php");
 
 $userid = $_SESSION['userid'];
 if (isset($_POST['submit'])) {
@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     $date = date('d-m-y h:i:s');
     $q = "insert into publish (user_id,news_id,date) values ('$userid', '$newsid','$date')";
     if ($conn->query($q))
-    header("location:index.php");
+      header("location:index.php");
   }
 }
 include "../inc/head.php";
@@ -28,6 +28,14 @@ include "inc/navbar.php";
   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-14">
 
     <form method="post">
+      <div class="mb-6">
+        <label for="newsid" class="block mb-2 text-sm font-medium text-gray-900">News ID</label>
+        <select name="newsid" id="newsid"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <option value="1" default>1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
       <div class="mb-6">
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Your title</label>
         <input type="text" id="title" name="title"
