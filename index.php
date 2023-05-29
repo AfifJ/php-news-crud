@@ -41,7 +41,7 @@ if (!isset($_SESSION['username'])) {
 ?>
 
 
-<body class="bg-white h-screen relative">
+<body class="bg-white flex flex-col min-h-screen">
 
   <nav class="bg-white border-gray-200 sticky top-0 shadow-xl">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
@@ -73,6 +73,9 @@ if (!isset($_SESSION['username'])) {
           <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton">
               <li>
+                <a href="dashboard/input.php" class="block px-4 py-2 hover:bg-gray-100 text-center">Write a News</a>
+              </li>
+              <li>
                 <a href="dashboard/index.php" class="block px-4 py-2 hover:bg-gray-100 text-center">Dashboard</a>
               </li>
               <li>
@@ -101,7 +104,7 @@ if (!isset($_SESSION['username'])) {
     </div>
   </nav>
 
-  <div class="flex-shrink max-w-full w-full lg:w-full lg:pl-8 lg:pb-8 order-first lg:order-last">
+  <div class="flex-shrink max-w-full w-full lg:pl-8 lg:pb-8">
     <div class="w-full bg-gray-50 h-full">
       <div class="text-sm py-6">
         <div class="w-full text-center">
@@ -112,15 +115,15 @@ if (!isset($_SESSION['username'])) {
   </div>
 
   <div class="grid place-items-center mr-6 ml-6">
-    <div class="mx-auto  my-10 grid gap-4 lg:grid-cols-2 max-w-6xl place-items-center">
+    <div class="mx-auto my-10 grid gap-4 lg:grid-cols-2 max-w-6xl place-items-center">
       <?php
       while ($article = $file->fetch_object()) {
         $title = $article->title;
         $image = $article->image;
         $desc = $article->content;
         ?>
-        <a href=""
-          class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
+        <div
+          class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow w-full md:h-48 md:flex-row md:max-w-xl hover:bg-gray-100 cursor-pointer">
           <?php if (!empty($image)) { ?>
             <img class="md:w-48 h-full md:aspect-square object-cover rounded-t-lg md:rounded-none md:rounded-l-lg"
               src="<?= $image ?>" alt="">
@@ -133,7 +136,7 @@ if (!isset($_SESSION['username'])) {
               <?= $desc ?>
             </p>
           </div>
-        </a>
+        </div>
         <?php
       }
 

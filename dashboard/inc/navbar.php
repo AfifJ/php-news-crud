@@ -25,7 +25,7 @@ $basename = basename($_SERVER['PHP_SELF']);
         </div>
         <div class="flex items-center">
           <div class="flex items-center ml-3">
-          <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+          <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover"
             class="inline-flex items-center justify-center w-full px-8 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
             <svg aria-hidden="true" class="w-5 h-5 mr-3 my-auto fill-current" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
@@ -91,11 +91,9 @@ $basename = basename($_SERVER['PHP_SELF']);
               </path>
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">Update</span>
-            <span
-              class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full">Pro</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -129,7 +127,7 @@ $basename = basename($_SERVER['PHP_SELF']);
             </svg>
             <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="../index.php" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
             <svg aria-hidden="true"

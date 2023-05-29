@@ -1,12 +1,12 @@
 
 
-<footer class="bg-white">
-    <div class="mx-auto w-full max-w-screen-xl">
-      <div class="px-4 py-6 bg-gray-100 md:flex md:items-center md:justify-between">
-        <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="https://flowbite.com/">Tugas Afif™</a>. All
-          Rights Reserved.
-        </span>
+<footer class="flex-shrink bg-white mt-auto w-full">
+    <div class="mx-auto w-full flex bg-gray-100 justify-center">
+      <div class="px-4 py-6 md:flex justify-center max-w-xl">
         <div class="flex mt-4 space-x-6 sm:justify-center md:mt-0">
+          <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="">Tugas Afif™</a>. All
+            Rights Reserved.
+          </span>
           <a href="https://github.com/AfifJ" class="text-gray-400 hover:text-gray-900">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path fill-rule="evenodd"
