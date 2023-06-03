@@ -201,6 +201,14 @@ if (isset($_GET['s'])) {
         </button>
       </form>
     <?php
+    } else {
+    ?>
+      <form class="mx-3" method="get">
+        <button class="text-gray-300 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" type="submit" disabled>
+          Prev page
+        </button>
+      </form>
+    <?php
     }
     if (($currentPage + 1) * $jumlahTampil < $totalData) {
     ?>
@@ -217,6 +225,16 @@ if (isset($_GET['s'])) {
           Next page
         </button>
       </form>
+    <?php
+    } else {
+    ?>
+
+      <form class="mx-3">
+        <button class="text-gray-300 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" type="submit">
+          Next page
+        </button>
+      </form>
+
     <?php
     }
     ?>
