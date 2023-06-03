@@ -6,7 +6,7 @@ include "inc/conn.php";
 if (isset($_SESSION['username'])) {
   echo "Sudah login dengan username " . $_SESSION['username'];
   echo "<br>";
-  echo "<a href=\"homepage.php\">home</a>";
+  echo "<a href=\"index.php\">home</a>";
   die;
 }
 
