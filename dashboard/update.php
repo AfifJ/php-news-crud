@@ -10,8 +10,6 @@ if (isset($_POST['submit'])) {
   $image = filter_var(htmlspecialchars($_POST['image'], FILTER_SANITIZE_ADD_SLASHES));
   $content = filter_var(htmlspecialchars($_POST['content'], FILTER_SANITIZE_ADD_SLASHES));
   $id = $_POST['newsid'];
-  $q = "";
-  // $q = "insert into news (title, content, image) values ('$title', '$content', '$image');";
   $q = "UPDATE news 
   SET 
   title = '$title',
@@ -49,14 +47,14 @@ include "inc/navbar.php";
       </form>
     <?php } ?>
     <?php
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update']) && isset($_POST['newsid'])) {
       $NewsID = $_POST['newsid'];
       $q = "SELECT id, title, content, image FROM news WHERE id = '$NewsID'";
-      $result = $conn->query($q)->fetch_object();
-      $title = $result->title;
-      $image = $result->image;
-      $content = $result->content;
-      $newsid = $result->id;
+      $eachresult = $conn->query($q)->fetch_object();
+      $title = $eachresult->title;
+      $image = $eachresult->image or null;
+      $content = $eachresult->content;
+      $newsid = $eachresult->id;
     ?>
       <form method="post">
         <div class="mb-6">
@@ -79,6 +77,10 @@ include "inc/navbar.php";
 
       </form>
     <?php
+    } else if (isset($_POST['update'])) {
+      ?>
+      <h2>There's an error</h2>
+      <?php
     }
 
     ?>

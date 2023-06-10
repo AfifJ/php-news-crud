@@ -15,7 +15,7 @@ if (isset($_POST['delete'])) {
   $conn->query($q);
 }
 
-$file = $conn->query("select * from news inner join publish on news.id = publish.news_id where publish.user_id = $userid order by publish.date desc");
+$file = $conn->query("select news.id, news.content, news.title, news.image from news inner join publish on news.id = publish.news_id where publish.user_id = '$userid' order by publish.date desc");
 
 ?>
 
@@ -34,6 +34,7 @@ $file = $conn->query("select * from news inner join publish on news.id = publish
         </a>
 
         <?php
+        if ($file->num_rows > 0) {
         while ($article = $file->fetch_object()) {
           $id = $article->id;
           $title = $article->title;
@@ -110,6 +111,8 @@ $file = $conn->query("select * from news inner join publish on news.id = publish
           </div>
         <?php
         }
+      }
+
         ?>
 
       </div>

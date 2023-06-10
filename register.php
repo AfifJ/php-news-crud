@@ -33,9 +33,8 @@ if (isset($_POST['submit'])) {
     } else {
       $response = "Dilakukan register";
       $q = "insert into user (username, password, role) values ('$username','$password','user')";
-      $_SESSION['username'] = $username;
       if ($conn->query($q))
-        header("location:index.php");
+        header("location:login.php");
       else
         $response = "Terjadi kesalahan";
     }

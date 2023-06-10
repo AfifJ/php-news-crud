@@ -5,62 +5,33 @@ include "inc/head.php";
 
 $response = "";
 $jumlahTampil = 4;
-
 $currentPage = 0;
+
 if (isset($_GET['p'])) {
   $currentPage = $_GET['p'];
+  if ($currentPage < 0) {
+    $currentPage = 0;
+  }
 }
 
-if ($currentPage < 0) {
-  $currentPage = 0;
-}
-
-$before = $currentPage * $jumlahTampil;
-$file = $conn->query("select * from news inner join publish where news.id = publish.news_id order by publish.date desc limit $before, $jumlahTampil");
-$totalData = $conn->query("select * from news")->num_rows;
 
 if (isset($_POST['signoutsure'])) {
   session_destroy();
   header("location:index.php");
 }
-/* if (!isset($_SESSION['username'])) {
-  ?>
-  <!-- Main modal -->
-  <div class="w-screen h-screen bg-gray-900 bg-opacity-80 fixed inset-0 z-40 grid place-items-center backdrop-blur-md">
 
-    <!-- Modal content -->
-    <div class="bg-white rounded-lg shadow w-1/2">
-
-      <!-- Modal header -->
-      <div class="px-6 py-4 border-b rounded-t">
-        <h3 class="text-base font-semibold text-gray-900 text-xl lg:text-3xl">
-          Login First
-        </h3>
-      </div>
-      <!-- Modal body -->
-      <div class="p-6">
-        <p class="text-sm font-normal text-gray-500">You have to log in to access this website</p>
-        <a href="login.php"
-          class="mt-6 flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-blue-50 hover:bg-blue-100 group hover:shadow">
-          <span class="flex-1 whitespace-nowrap text-center">Login</span>
-        </a>
-      </div>
-    </div>
-  </div>
-  <?php
-}
- */
+$file = "";
+$totalData = 0;
 if (isset($_GET['s'])) {
   $s = $_GET['s'];
-
   $jumlahTampil = 2;
   $before = $currentPage * $jumlahTampil;
-  /*   $file = $conn->query("select * from news inner join publish on news.id = publish.news_id where news.content like '%$s%' order by publish.date desc");
-   */
   $file = $conn->query("select * from news inner join publish on news.id = publish.news_id where news.title like '%$s%' order by publish.date desc limit $before, $jumlahTampil");
-
-
   $totalData = $conn->query("select * from news inner join publish on news.id = publish.news_id where news.title like '%$s%'")->num_rows;
+} else {
+  $before = $currentPage * $jumlahTampil;
+  $file = $conn->query("select * from news inner join publish where news.id = publish.news_id order by publish.date desc limit $before, $jumlahTampil");
+  $totalData = $conn->query("select * from news")->num_rows;
 }
 ?>
 
@@ -230,7 +201,7 @@ if (isset($_GET['s'])) {
     ?>
 
       <form class="mx-3">
-        <button class="text-gray-300 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" type="submit">
+        <button disabled class="text-gray-300 bg-white border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" type="submit">
           Next page
         </button>
       </form>
